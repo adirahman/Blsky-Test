@@ -1,5 +1,6 @@
 package com.arc.blchat.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +20,17 @@ class ChatAdapter : ListAdapter<MessageEntity, ChatAdapter.ChatViewHolder>(DiffC
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val message = getItem(position)
+        Log.d("ChatAdapter", "Binding message: $message")
+        Log.d("ChatAdapter", "Binding message at position $position: $message")
         holder.bind(message)
     }
+
+    override fun submitList(list: List<MessageEntity>?) {
+        Log.d("ChatAdapter", "New list submitted: $list")
+        super.submitList(list)
+    }
+
+
     class ChatViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         private val messageTextView: TextView = itemView.findViewById(R.id.text_message)
         private val timeStampTextView: TextView = itemView.findViewById(R.id.text_timestamp)
